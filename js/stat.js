@@ -55,4 +55,3 @@ window.renderStatistics = function (ctx, names, times) {
     renderText(times[i].toFixed(0), initialX, heightColumn - (step * times[i]) + 90, 'grey');
   });
 };
-
