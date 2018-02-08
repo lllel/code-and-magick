@@ -57,17 +57,17 @@ var addWizard = function (field) {
 };
 addWizard(wizardsContainer);
 
-var isEscPressEvent = function (evt, action) {
+var isEscPressEvent = function (evt, cb) {
   if (evt.keyCode === ButtonKeyCode.ESC) {
 
-    action();
+    cb();
   }
 };
 
-var isEnterPressEvent = function (evt, action) {
+var isEnterPressEvent = function (evt, cb) {
   if (evt.keyCode === ButtonKeyCode.ENTER) {
 
-    action();
+    cb();
   }
 };
 
@@ -85,15 +85,16 @@ var onPopupCloseEnterPress = function (evt) {
 
 var onPopupOpenClick = function () {
   setup.classList.remove('hidden');
+  popupOpen.removeEventListener('keydown', onPopupOpenEnterPress);
   document.addEventListener('keydown', onPopupOpenEscPress);
-  popupOpen.addEventListener('keydown', onPopupOpenEnterPress);
+  popupClose.addEventListener('keydown', onPopupCloseEnterPress);
 };
 
 var onPopupCloseClick = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupOpenEscPress);
-  popupOpen.removeEventListener('keydown', onPopupOpenEnterPress);
   popupClose.removeEventListener('keydown', onPopupCloseEnterPress);
+  popupOpen.addEventListener('keydown', onPopupOpenEnterPress);
 };
 
 userNameInput.addEventListener('focus', function () {
