@@ -48,29 +48,27 @@
 
     if (evt.target.tagName !== 'IMG' && evt.target.children.length === 0) {
       evt.target.appendChild(draggedItem);
-      evt.target.style.outline = 'none';
+      evt.target.classList.remove('dragenter-border');
     }
-
-    draggedItem = null;
   });
 
   artifactsElement.addEventListener('dragenter', function (evt) {
     evt.preventDefault();
 
     if (evt.target.tagName === 'DIV' && evt.target.children.length === 0) {
-      evt.target.style.outline = '2px dashed red';
+      evt.target.classList.add('dragenter-border');
     }
 
     if (evt.target.tagName === 'DIV' && evt.target.children.length !== 0) {
-      evt.target.style.backgroundColor = 'yellow';
+      evt.target.classList.add('dragenter-bg-color');
     }
   });
 
   artifactsElement.addEventListener('dragleave', function (evt) {
     evt.preventDefault();
 
-    evt.target.style.outline = 'none';
-    evt.target.style.backgroundColor = 'none';
+    evt.target.classList.remove('dragenter-border');
+    evt.target.classList.remove('dragenter-bg-color');
   });
 
   window.setup = {
