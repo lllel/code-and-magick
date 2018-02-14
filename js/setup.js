@@ -32,6 +32,8 @@
 
   // ПЕРЕТАСКИВАНИЕ
   shopElement.addEventListener('dragstart', function (evt) {
+    draggedItem = null;
+
     if (evt.target.tagName === 'IMG') {
       draggedItem = evt.target.cloneNode(true);
     }
