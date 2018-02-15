@@ -1019,3 +1019,12 @@ input[type=radio]:checked + .review-mark-label
 
     opacity: 0;
 }
+
+.dragenter-border {
+  border: 2px dashed red;
+}
+
+.dragenter-bg-color {
+  background-color: yellow;
+}
+
