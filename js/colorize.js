@@ -20,12 +20,12 @@
       numberColor = 0;
     }
 
-    if (el.style.fill) {
-      el.style.fill = arr[numberColor];
+    if (el.tagName === 'DIV') {
+      el.style.backgroundColor = arr[numberColor];
       numberColor++;
 
     } else {
-      el.style.backgroundColor = arr[numberColor];
+      el.style.fill = arr[numberColor];
       numberColor++;
     }
 
@@ -33,14 +33,14 @@
   };
 
   wizardCoat.addEventListener('click', function () {
-    isChangeColor(wizardCoat, COAT_COLORS, ColorType.colorCoat);
+    ColorType.colorCoat = isChangeColor(wizardCoat, COAT_COLORS, ColorType.colorCoat);
   });
 
   wizardEyes.addEventListener('click', function () {
-    isChangeColor(wizardEyes, EYES_COLORS, ColorType.colorEye);
+    ColorType.colorEye = isChangeColor(wizardEyes, EYES_COLORS, ColorType.colorEye);
   });
 
   wizardFireball.addEventListener('click', function () {
-    isChangeColor(wizardFireball, FIREBALL_COLOR, ColorType.colorFireball);
+    ColorType.colorFireball = isChangeColor(wizardFireball, FIREBALL_COLOR, ColorType.colorFireball);
   });
 })();
