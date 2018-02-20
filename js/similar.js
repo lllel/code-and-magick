@@ -6,7 +6,17 @@
   var wizardsContainer = window.util.setup.querySelector('.setup-similar-list');
 
   var onSuccessGetWizards = function (data) {
-    var wizards = JSON.parse(data.slice(0));
+    try {
+      var wizards = JSON.parse(data.slice(0));
+
+    } catch (err) {
+      if (err instanceof window.util.typeError[err.name]) {
+        window.util.typeError[err.name](err);
+
+      } else {
+        window.util.typeError['default'](err);
+      }
+    }
 
     var elemsFragment = window.util.createElemsFragment(window.util.getRandomElementArr(wizards, QUANTITY_WIZARD), window.setup.getRenderWizard);
 
@@ -23,15 +33,5 @@
 
   window.util.setup.querySelector('.setup-similar').classList.remove('hidden');
 
-  try {
-    window.backend.load(onSuccessGetWizards, onErrorGetWizards);
-
-  } catch (err) {
-    if (err instanceof window.util.typeError[err.name]) {
-      window.util.typeError[err.name](err);
-
-    } else {
-      window.util.typeError['default'](err);
-    }
-  }
+  window.backend.load(onSuccessGetWizards, onErrorGetWizards);
 })();
