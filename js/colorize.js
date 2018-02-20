@@ -10,9 +10,9 @@
   var wizardFireball = window.util.setup.querySelector('.setup-fireball-wrap');
 
   var ColorType = {
-    colorCoat: 0,
-    colorEye: 0,
-    colorFireball: 0
+    colorCoat: 1,
+    colorEye: 1,
+    colorFireball: 1
   };
 
   var isChangeColor = function (el, arr, numberColor) {
