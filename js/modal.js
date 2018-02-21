@@ -3,7 +3,6 @@
 (function () {
   var popupOpen = document.querySelector('.setup-open');
   var popupClose = window.util.setup.querySelector('.setup-close');
-  var userNameInput = window.util.setup.querySelector('.setup-user-name');
   var dialogHandle = document.querySelector('.upload');
 
   var onPopupOpenEscPress = function (evt) {
@@ -31,14 +30,6 @@
   var onPopupCloseEnterPress = function (evt) {
     window.util.isEnterPressEvent(evt, onPopupCloseClick);
   };
-
-  userNameInput.addEventListener('focus', function () {
-    document.removeEventListener('keydown', onPopupOpenEscPress);
-  });
-
-  userNameInput.addEventListener('blur', function () {
-    document.addEventListener('keydown', onPopupOpenEscPress);
-  });
 
   popupClose.addEventListener('click', onPopupCloseClick);
   popupClose.addEventListener('keydown', onPopupCloseEnterPress);
@@ -92,4 +83,8 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  window.modal = {
+    onPopupOpenEscPress: onPopupOpenEscPress
+  };
 })();
