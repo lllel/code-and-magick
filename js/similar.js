@@ -7,18 +7,14 @@
 
   var addItemsInPage = function (arr) {
     var anyItems = arr.slice(0, QUANTITY_WIZARD);
-
     var elemsFragment = window.util.createElemsFragment(anyItems, window.setup.getRenderWizard);
 
     wizardsContainer.innerHTML = '';
-
     wizardsContainer.appendChild(elemsFragment);
   };
 
   var onSuccessGetWizards = function (data) {
     window.wizards = JSON.parse(data.slice(0));
-
-    // var elemsFragment = window.util.createElemsFragment(window.util.getRandomElementArr(window.wizards, QUANTITY_WIZARD), window.setup.getRenderWizard);
 
     addItemsInPage(window.wizards);
   };
