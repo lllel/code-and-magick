@@ -9,8 +9,6 @@
   var getRenderWizard = function (wizard) {
     var wizardElement = templateWizard.cloneNode(true);
 
-    wizard.toString();
-
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
     wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;

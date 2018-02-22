@@ -5,12 +5,22 @@
 
   var wizardsContainer = window.util.setup.querySelector('.setup-similar-list');
 
-  var onSuccessGetWizards = function (data) {
-    var wizards = JSON.parse(data.slice(0));
+  var addItemsInPage = function (arr) {
+    var anyItems = arr.slice(0, QUANTITY_WIZARD);
 
-    var elemsFragment = window.util.createElemsFragment(window.util.getRandomElementArr(wizards, QUANTITY_WIZARD), window.setup.getRenderWizard);
+    var elemsFragment = window.util.createElemsFragment(anyItems, window.setup.getRenderWizard);
+
+    wizardsContainer.innerHTML = '';
 
     wizardsContainer.appendChild(elemsFragment);
+  };
+
+  var onSuccessGetWizards = function (data) {
+    window.wizards = JSON.parse(data.slice(0));
+
+    // var elemsFragment = window.util.createElemsFragment(window.util.getRandomElementArr(window.wizards, QUANTITY_WIZARD), window.setup.getRenderWizard);
+
+    addItemsInPage(window.wizards);
   };
 
   var onErrorGetWizards = function (error) {
@@ -34,4 +44,8 @@
       window.util.typeError['default'](err);
     }
   }
+
+  window.similar = {
+    addItemsInPage: addItemsInPage
+  };
 })();

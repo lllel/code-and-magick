@@ -29,4 +29,8 @@
 
     window.backend.save(new FormData(form), onSuccessUploadWizards, onErrorUploadWizards);
   });
+
+  window.form = {
+    form: form
+  };
 })();

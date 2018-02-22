@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var TIMER_DEBOUNCE = 500;
+
+  var timerId = null;
   var setup = document.querySelector('.setup');
 
   var ButtonKeyCode = {
@@ -70,6 +73,14 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
+  var debounce = function (func) {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+
+    timerId = setTimeout(func, TIMER_DEBOUNCE);
+  };
+
   var isEscPressEvent = function (evt, cb) {
     if (evt.keyCode === ButtonKeyCode.ESC) {
 
@@ -90,6 +101,7 @@
     isEnterPressEvent: isEnterPressEvent,
     createElemsFragment: createElemsFragment,
     getRandomElementArr: getRandomElementArr,
+    debounce: debounce,
     typeError: typeError,
     setup: setup
   };
