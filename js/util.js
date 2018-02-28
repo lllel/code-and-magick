@@ -2,6 +2,7 @@
 
 (function () {
   var TIMER_DEBOUNCE = 500;
+  var ERROR_MESSAGE_DELAY_TIME = 2000;
 
   var timerId = null;
   var setup = document.querySelector('.setup');
@@ -73,6 +74,18 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
+  var addErrorMessage = function (error) {
+    var node = document.createElement('div');
+
+    node.classList.add('error-text');
+    node.textContent = 'Произошла ошибка отправки данных: ' + error;
+    document.body.insertAdjacentElement('afterbegin', node);
+
+    setTimeout(function () {
+      node.style.display = 'none';
+    }, ERROR_MESSAGE_DELAY_TIME);
+  };
+
   var debounce = function (func) {
     if (timerId) {
       clearTimeout(timerId);
@@ -102,6 +115,7 @@
     createElemsFragment: createElemsFragment,
     getRandomElementArr: getRandomElementArr,
     debounce: debounce,
+    addErrorMessage: addErrorMessage,
     typeError: typeError,
     setup: setup
   };

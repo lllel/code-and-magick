@@ -17,11 +17,7 @@
   };
 
   var onErrorUploadWizards = function (error) {
-    var node = document.createElement('div');
-
-    node.classList.add('error-text');
-    node.textContent = 'Произошла ошибка отправки данных: ' + error;
-    document.body.insertAdjacentElement('afterbegin', node);
+    window.util.addErrorMessage(error);
   };
 
   form.addEventListener('submit', function (evt) {
