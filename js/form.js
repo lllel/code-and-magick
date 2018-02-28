@@ -13,7 +13,7 @@
   });
 
   var onSuccessUploadWizards = function () {
-    form.classList.add('hidden');
+    window.modal.onPopupCloseClick();
   };
 
   var onErrorUploadWizards = function (error) {
@@ -21,9 +21,9 @@
   };
 
   form.addEventListener('submit', function (evt) {
-    evt.preventDefault();
-
     window.backend.save(new FormData(form), onSuccessUploadWizards, onErrorUploadWizards);
+
+    evt.preventDefault();
   });
 
   window.form = {

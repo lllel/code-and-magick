@@ -5,7 +5,7 @@
     var rank = 0;
 
     if (wizard.colorCoat === window.colorize.COAT_COLORS[window.colorize.ColorType.colorCoat - 1]) {
-      rank += 2;
+      rank += 3;
     }
 
     if (wizard.colorEyes === window.colorize.EYES_COLORS[window.colorize.ColorType.colorEye - 1]) {

@@ -85,6 +85,7 @@
   });
 
   window.modal = {
-    onPopupOpenEscPress: onPopupOpenEscPress
+    onPopupOpenEscPress: onPopupOpenEscPress,
+    onPopupCloseClick: onPopupCloseClick
   };
 })();
