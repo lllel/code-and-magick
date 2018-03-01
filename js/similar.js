@@ -5,20 +5,22 @@
 
   var wizardsContainer = window.util.setup.querySelector('.setup-similar-list');
 
-  var onSuccessGetWizards = function (data) {
-    var wizards = JSON.parse(data.slice(0));
+  var addItemsInPage = function (arr) {
+    var anyItems = arr.slice(0, QUANTITY_WIZARD);
+    var elemsFragment = window.util.createElemsFragment(anyItems, window.setup.getRenderWizard);
 
-    var elemsFragment = window.util.createElemsFragment(window.util.getRandomElementArr(wizards, QUANTITY_WIZARD), window.setup.getRenderWizard);
-
+    wizardsContainer.innerHTML = '';
     wizardsContainer.appendChild(elemsFragment);
   };
 
-  var onErrorGetWizards = function (error) {
-    var node = document.createElement('div');
+  var onSuccessGetWizards = function (data) {
+    window.wizards = JSON.parse(data.slice(0));
 
-    node.classList.add('error-text');
-    node.textContent = 'Произошла ошибка отправки данных: ' + error;
-    document.body.insertAdjacentElement('afterbegin', node);
+    addItemsInPage(window.wizards);
+  };
+
+  var onErrorGetWizards = function (error) {
+    window.util.addErrorMessage(error);
   };
 
   window.util.setup.querySelector('.setup-similar').classList.remove('hidden');
@@ -34,4 +36,8 @@
       window.util.typeError['default'](err);
     }
   }
+
+  window.similar = {
+    addItemsInPage: addItemsInPage
+  };
 })();

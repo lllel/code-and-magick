@@ -34,13 +34,23 @@
 
   wizardCoat.addEventListener('click', function () {
     ColorType.colorCoat = isChangeColor(wizardCoat, COAT_COLORS, ColorType.colorCoat);
+    window.util.debounce(window.filtered.getFilteredWizards);
   });
 
   wizardEyes.addEventListener('click', function () {
     ColorType.colorEye = isChangeColor(wizardEyes, EYES_COLORS, ColorType.colorEye);
+    window.util.debounce(window.filtered.getFilteredWizards);
   });
 
   wizardFireball.addEventListener('click', function () {
     ColorType.colorFireball = isChangeColor(wizardFireball, FIREBALL_COLOR, ColorType.colorFireball);
+    window.util.debounce(window.filtered.getFilteredWizards);
   });
+
+  window.colorize = {
+    COAT_COLORS: COAT_COLORS,
+    EYES_COLORS: EYES_COLORS,
+    FIREBALL_COLOR: FIREBALL_COLOR,
+    ColorType: ColorType
+  };
 })();

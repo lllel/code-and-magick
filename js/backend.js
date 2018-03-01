@@ -2,6 +2,8 @@
 
 (function () {
   var SERVER_URL = 'https://js.dump.academy/code-and-magick';
+  var STATUS_OK = 200;
+  var TIMER_DELAY = 10000;
 
   var ErrorCode = {
     '400': 'Неверный запрос',
@@ -16,10 +18,10 @@
     var xhr = new XMLHttpRequest();
 
     xhr.type = 'json';
-    xhr.timeout = 10000;
+    xhr.timeout = TIMER_DELAY;
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === STATUS_OK) {
         onLoad(xhr.response);
 
       } else {
@@ -32,7 +34,7 @@
     });
 
     xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соеднинения');
+      onError('Произошла ошибка соединения');
     });
 
     xhr.open('GET', SERVER_URL + '/data');
