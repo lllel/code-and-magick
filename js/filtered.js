@@ -32,19 +32,23 @@
   };
 
   var getFilteredWizards = function () {
-    var wizardsItems = window.wizards.slice(0);
+    if (window.wizards) {
+      var wizardsItems = window.wizards.slice(0);
+    }
 
-    wizardsItems.sort(function (left, right) {
-      var rankDiff = getRank(right) - getRank(left);
+    if (wizardsItems) {
+      wizardsItems.sort(function (left, right) {
+        var rankDiff = getRank(right) - getRank(left);
 
-      if (rankDiff === 0) {
-        rankDiff = namesComparator(left.name, right.name);
-      }
+        if (rankDiff === 0) {
+          rankDiff = namesComparator(left.name, right.name);
+        }
 
-      return rankDiff;
-    });
+        return rankDiff;
+      });
 
-    window.similar.addItemsInPage(wizardsItems);
+      window.similar.addItemsInPage(wizardsItems);
+    }
   };
 
   window.filtered = {

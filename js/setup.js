@@ -6,12 +6,21 @@
   var artifactsElement = document.querySelector('.setup-artifacts');
   var draggedItem = null;
 
+  var viewArtifacts = function (artifact) {
+    var wizardElement = document.createElement('li');
+
+    wizardElement.textContent = artifact.name;
+
+    return wizardElement;
+  };
+
   var getRenderWizard = function (wizard) {
     var wizardElement = templateWizard.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
     wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
+    wizardElement.querySelector('.setup-artifacts-items').appendChild(window.util.createElemsFragment(wizard.artifacts, viewArtifacts));
 
     return wizardElement;
   };
