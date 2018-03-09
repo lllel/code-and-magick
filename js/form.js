@@ -24,6 +24,19 @@
     window.backend.save(new FormData(form), onSuccessUploadWizards, onErrorUploadWizards);
 
     evt.preventDefault();
+
+    var wizardCopy = document.querySelector('svg').cloneNode(true);
+
+    wizardCopy.querySelector('#wizard-coat').style.fill = window.colorize.wizardCoat.style.fill;
+    wizardCopy.querySelector('#wizard-eyes').style.fill = window.colorize.wizardEyes.style.fill;
+
+    var wizardBase64Right = window.svg2base64.svg2base64(wizardCopy);
+
+    wizardCopy.querySelector('#wizard').setAttribute('transform', 'translate(62, 0) scale(-1, 1)');
+
+    var wizardBase64Left = window.svg2base64.svg2base64(wizardCopy);
+
+    window.restartGame(wizardBase64Right, wizardBase64Left);
   });
 
   window.form = {

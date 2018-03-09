@@ -44,8 +44,8 @@
     evt.preventDefault();
 
     if (evt.target.tagName !== 'IMG' && evt.target.children.length === 0) {
-      evt.target.appendChild(draggedItem);
       evt.target.classList.remove('dragenter-border');
+      evt.target.appendChild(draggedItem);
     }
   });
 
@@ -56,7 +56,7 @@
       evt.target.classList.add('dragenter-border');
     }
 
-    if (evt.target.tagName === 'DIV' && evt.target.children.length !== 0) {
+    if (evt.target.tagName === 'IMG') {
       evt.target.classList.add('dragenter-bg-color');
     }
   });

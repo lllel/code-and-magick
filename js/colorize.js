@@ -51,6 +51,9 @@
     COAT_COLORS: COAT_COLORS,
     EYES_COLORS: EYES_COLORS,
     FIREBALL_COLOR: FIREBALL_COLOR,
-    ColorType: ColorType
+    ColorType: ColorType,
+    wizardCoat: wizardCoat,
+    wizardEyes: wizardEyes,
+    wizardFireball: wizardFireball
   };
 })();
