@@ -46,12 +46,16 @@
 
       // Начальные данные
       self.dragObject.elem = elem;
-      self.dragObject.x = evt.pageX;
-      self.dragObject.y = evt.pageY;
+      self.dragObject.downX = evt.pageX;
+      self.dragObject.downY = evt.pageY;
       self.dragObject.width = elem.offsetWidth;
       self.dragObject.height = elem.offsetHeight;
-      self.dragObject.left = elem.getBoundingClientRect().left + window.pageXOffset;
-      self.dragObject.top = elem.getBoundingClientRect().top + window.pageYOffset;
+      self.dragObject.left = elem.getBoundingClientRect().left - this.elem.getBoundingClientRect().left;
+      self.dragObject.top = elem.getBoundingClientRect().top - this.elem.getBoundingClientRect().top;
+      // self.dragObject.top2 = elem.getBoundingClientRect().top + window.pageYOffset;
+
+      // console.log(self.dragObject.top);
+      // console.log(self.dragObject.top2);
 
       document.addEventListener('mousemove', this.onMouseMove.bind(this));
       document.addEventListener('mouseup', this.onMouseUp.bind(this));
@@ -67,8 +71,8 @@
       }
 
       if (!self.dragObject.avatar) {
-        var shiftX = evt.pageX - self.dragObject.x;
-        var shiftY = evt.pageY - self.dragObject.y;
+        var shiftX = evt.pageX - self.dragObject.downX;
+        var shiftY = evt.pageY - self.dragObject.downY;
 
         // Если сдвиг менее 3пх, то ничего не делаем
         if (Math.abs(shiftX) < 3 && Math.abs(shiftY) < 3) {
@@ -203,68 +207,63 @@
     var old = {
       parent: elem.parentNode,
       nextSibling: elem.nextElementSibling,
-      position: elem.position || '',
-      left: elem.getBoundingClientRect().left - this.elem.getBoundingClientRect().left,
-      top: elem.getBoundingClientRect().top - this.elem.getBoundingClientRect().top,
-      zIndex: elem.zIndex || ''
+      left: this.dragObject.left,
+      top: this.dragObject.top
     };
 
     avatar.rollback = function () {
       old.parent.insertBefore(avatar, old.nextSibling);
+
       avatar.style.transition = '1s ease';
       avatar.style.position = 'absolute';
       avatar.style.zIndex = '9999';
       avatar.classList.remove('avatar');
 
-      var currentX = parseFloat(avatar.style.left) + window.pageXOffset;
-      var currentY = parseFloat(avatar.style.top) + window.pageYOffset;
+      var long;
+      var stepX;
+      var stepY;
+      var timerId;
 
-      avatar.style.left = currentX + 'px';
-      avatar.style.top = currentY + 'px';
-
-      var left = old.left;
-      var top = old.top;
-      var moveX = currentX - old.left;
-      var moveY = currentY - old.top;
+      var moveX = old.left;
+      var moveY = old.top;
       var max = Math.max(Math.abs(moveX), Math.abs(moveY));
       var min = Math.min(Math.abs(moveX), Math.abs(moveY));
       var steps = Math.floor(max / 10);
       var minStep = min / steps;
 
-      if(Math.abs(moveX) > Math.abs(moveY) ) {
-        var long = 'left';
-        var short = 'top';
+      if(max > min) {
+        long = 'left';
       }
       else {
-        var long = 'top';
-        var short = 'left';
+        long = 'top';
       }
 
       if(long === 'left') {
-        var stepX = moveX > 0 ? -10 : 10;
-        var stepY = moveY > 0 ? -minStep : minStep;
-      }
-      else {
-        var stepY = moveY > 0 ? -10 : 10;
-        var stepX = moveX > 0 ? -minStep : minStep;
+        stepX = moveX > 0 ? -10 : 10;
+        stepY = moveY > 0 ? -minStep : minStep;
       }
 
-      var timer;
+      else {
+        stepY = moveY > 0 ? -10 : 10;
+        stepX = moveX > 0 ? -minStep : minStep;
+      }
+
       var moveBack = function me() {
         if(max > 10) {
           avatar.style.left = parseFloat(avatar.style.left) + stepX + 'px';
           avatar.style.top = parseFloat(avatar.style.top) + stepY + 'px';
           max -= 10;
-          min -= minStep;
-          timer = setTimeout(me,10);
+          timerId = setTimeout(me,10);
         }
         else {
-          avatar.style.left = left + 'px';
-          avatar.style.top = top + 'px';
+          avatar.style.left = old.left + 'px';
+          avatar.style.top = old.top + 'px';
           max = 0;
-          timer = null;
+          timerId = null;
         }
-      }();
+      };
+
+      moveBack();
     };
 
     return avatar;
@@ -274,6 +273,7 @@
     var avatar = this.dragObject.avatar;
 
     avatar.classList.add('avatar');
+    avatar.style.position = 'absolute';
     document.body.appendChild(avatar);
   };
 
