@@ -778,7 +778,9 @@ input[type=radio]:checked + .review-mark-label
 
 .setup-player
 {
-    position: relative;
+    /*position: relative;*/
+
+    position: static;
 
     height: 300px;
     min-height: 300px;
@@ -798,7 +800,7 @@ input[type=radio]:checked + .review-mark-label
 .setup-fireball-wrap
 {
     position: absolute;
-    top: 0;
+    top: 100px;
     left: 300px;
 
     width: 75px;
@@ -818,9 +820,9 @@ input[type=radio]:checked + .review-mark-label
 
 .setup-artifacts
 {
-    position: absolute;
-    right: 46px;
-    bottom: 0;
+    /*position: absolute;*/
+    /*right: 46px;*/
+    /*bottom: 0;*/
 
     display: flex;
 
@@ -829,6 +831,7 @@ input[type=radio]:checked + .review-mark-label
 
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-left: 457px;
 }
 
 .setup-artifacts-cell
@@ -1028,7 +1031,7 @@ input[type=radio]:checked + .review-mark-label
 }
 
 .dragenter-bg-color {
-  background-color: yellow;
+  background-color: lightyellow;
 }
 
 .error-text {
@@ -1065,6 +1068,10 @@ input[type=radio]:checked + .review-mark-label
   transition: 0.3s ease;
 }
 
+.setup-artifacts-container {
+  position: relative;
+}
+
 .setup-artifacts-items:hover {
   opacity: 1;
   transition: 0.3s ease;
@@ -1073,4 +1080,16 @@ input[type=radio]:checked + .review-mark-label
 .shop-img {
   display: block;
   padding-bottom: 15px;
+}
+
+.avatar {
+  position: absolute;
+  padding-top: 10px;
+  padding-left: 15px;
+  display: block;
+  width: 35px;
+  height: 35px;
+  z-index: 99999;
+  opacity: 0.5;
+  transition: 0.5s linear;
 }
